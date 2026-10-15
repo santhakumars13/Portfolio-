@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santha Kumar | AI & Data Science Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .navbar {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      transition: color 0.2s ease;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* Containers & Sections */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+
+    .section-tag {
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      min-height: 75vh;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-content h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 540px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #0b0f19;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-left: 0.5rem;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Badge / Profile Preview */
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      min-width: 260px;
+    }
+
+    .avatar-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0b0f19;
+      margin: 0 auto 1.2rem auto;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-card .val {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-card .desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    /* Projects Grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .project-tag {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+
+      .hero {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .hero-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">SK.</div>
+      <div class="menu-icon">&#9776;</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="section-tag">AI & Data Science</div>
+      <h1>Hi, I'm Santha Kumar</h1>
+      <h2>AI & Data Science Student</h2>
+      <p>I build data-driven solutions using analytics, machine learning, and visualization to solve practical real-world problems.</p>
+      
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+        <div class="social-links">
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="avatar-circle">SK</div>
+      <h3>B.Tech AI & Data Science</h3>
+      <p style="color: var(--text-muted); margin-top: 0.25rem;">2023 – 2027</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-tag">About Me</div>
+    <h2 class="section-title">Turning data into useful insights</h2>
+    <p style="color: var(--text-muted); max-width: 800px; font-size: 1.05rem;">
+      I am a B.Tech Artificial Intelligence and Data Science student at Er. Perumal Manimekalai College of Engineering, Hosur. I am interested in Data Analytics, Business Analytics, Data Science, Machine Learning, and AI.
+    </p>
+    <p style="color: var(--text-muted); max-width: 800px; margin-top: 1rem; font-size: 1.05rem;">
+      My focus is on developing practical projects that combine data preparation, analysis, visualization, and machine learning to support better decisions.
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="val">8.2</div>
+        <div class="desc">CGPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="val">B.Tech</div>
+        <div class="desc">AI & DS Degree</div>
+      </div>
+      <div class="stat-card">
+        <div class="val">2027</div>
+        <div class="desc">Graduation Year</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="section-tag">Skills</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-tag">Python</div>
+      <div class="skill-tag">SQL</div>
+      <div class="skill-tag">Excel</div>
+      <div class="skill-tag">Tableau</div>
+      <div class="skill-tag">Power BI</div>
+      <div class="skill-tag">R Programming</div>
+      <div class="skill-tag">Machine Learning</div>
+      <div class="skill-tag">Deep Learning</div>
+      <div class="skill-tag">Data Science</div>
+      <div class="skill-tag">Data Analytics</div>
+      <div class="skill-tag">MATLAB</div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="section-tag">Projects</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Machine Learning</div>
+          <h3 style="margin-top: 0.4rem;">Bank Loan Approval Prediction</h3>
+          <p style="margin-top: 0.8rem;">
+            A predictive classification system built to evaluate applicant eligibility and streamline loan approval decisions using statistical modeling and supervised machine learning algorithms.
+          </p>
+        </div>
+        <div>
+          <a href="#" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">View Details &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Anchor -->
+  <section id="contact" style="text-align: center; padding-bottom: 5rem;">
+    <div class="section-tag">Get in Touch</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem auto;">
+      I'm always open to discussing new opportunities, analytics projects, and machine learning research.
+    </p>
+    <a href="mailto:example@domain.com" class="btn btn-primary">Send an Email</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Santha Kumar. All rights reserved.
+  </footer>
+
+</body>
+  </html>
+  
