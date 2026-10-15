@@ -1,128 +1,149 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Dynamic Year
-  const yearElement = document.getElementById("currentYear");
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+/* ==========================================================================
+   1. Interactive Neural Network Node Canvas
+   ========================================================================== */
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+let particles = [];
+
+function initCanvas() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  particles = [];
+
+  // Optimal particle density calculation
+  const particleCount = Math.floor((width * height) / 30000);
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45,
+      radius: Math.random() * 1.5 + 0.5
+    });
   }
+}
 
-  // 2. Ambient Cursor Lighting (Follows Mouse pointer smoothly)
-  const ambientGlow = document.getElementById("ambientGlow");
-  window.addEventListener("pointermove", (e) => {
-    if (!ambientGlow) return;
-    ambientGlow.style.left = `${e.clientX}px`;
-    ambientGlow.style.top = `${e.clientY}px`;
-  });
+function renderMatrix() {
+  ctx.clearRect(0, 0, width, height);
 
-  // 3. Responsive Navigation Toggle
-  const mobileToggle = document.getElementById("mobileToggle");
-  const navMenu = document.getElementById("navMenu");
+  ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.06)';
 
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-      const spans = mobileToggle.querySelectorAll("span");
-      if (navMenu.classList.contains("open")) {
-        spans[0].style.transform = "rotate(45deg) translate(5px, 6px)";
-        spans[1].style.transform = "rotate(-45deg) translate(5px, -6px)";
-      } else {
-        spans[0].style.transform = "none";
-        spans[1].style.transform = "none";
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    // Boundary bouncing
+    if (p.x < 0 || p.x > width) p.vx *= -1;
+    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Line connections between near neighbors
+    for (let j = i + 1; j < particles.length; j++) {
+      const p2 = particles[j];
+      const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
+
+      if (distance < 120) {
+        ctx.lineWidth = 1 - distance / 120;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
       }
-    });
-
-    // Close menu when clicking navigation links
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        const spans = mobileToggle.querySelectorAll("span");
-        spans[0].style.transform = "none";
-        spans[1].style.transform = "none";
-      });
-    });
-  }
-
-  // 4. Interactive Credit Scoring Sandbox (Simulated Logistic Inference)
-  const cibilInput = document.getElementById("cibil");
-  const incomeInput = document.getElementById("income");
-  const dtiInput = document.getElementById("dti");
-
-  const cibilVal = document.getElementById("cibilVal");
-  const incomeVal = document.getElementById("incomeVal");
-  const dtiVal = document.getElementById("dtiVal");
-
-  const riskPctDisplay = document.getElementById("riskPct");
-  const verdictBadge = document.getElementById("verdictBadge");
-
-  function calculateRiskScore() {
-    if (!cibilInput || !incomeInput || !dtiInput) return;
-
-    const cibil = parseFloat(cibilInput.value);
-    const income = parseFloat(incomeInput.value);
-    const dti = parseFloat(dtiInput.value);
-
-    // Update real-time label outputs
-    cibilVal.textContent = cibil;
-    incomeVal.textContent = income;
-    dtiVal.textContent = `${dti}%`;
-
-    // Mathematical logistic risk estimation weights
-    // Lower CIBIL raises risk, higher DTI raises risk, higher income provides safety
-    const normalizedCibil = (cibil - 300) / 600; // 0 to 1
-    const normalizedIncome = Math.min(income / 40, 1); // Cap at 40 LPA
-    const normalizedDti = dti / 100; // 0 to 0.8
-
-    // Risk index formula
-    let rawRisk = 0.55 - normalizedCibil * 0.65 + normalizedDti * 0.45 - normalizedIncome * 0.2;
-    rawRisk = Math.max(0.04, Math.min(0.96, rawRisk)); // Bound between 4% and 96%
-
-    const riskPercentage = Math.round(rawRisk * 100);
-    riskPctDisplay.textContent = `${riskPercentage}%`;
-
-    // Dynamic thresholds and UI feedback
-    if (riskPercentage < 30) {
-      riskPctDisplay.style.color = "var(--accent-green)";
-      verdictBadge.textContent = "Eligible for Automated Approval";
-      verdictBadge.style.color = "var(--accent-green)";
-      verdictBadge.style.backgroundColor = "rgba(52, 211, 153, 0.15)";
-      verdictBadge.style.borderColor = "rgba(52, 211, 153, 0.3)";
-    } else if (riskPercentage <= 55) {
-      riskPctDisplay.style.color = "var(--accent-amber)";
-      verdictBadge.textContent = "Requires Manual Underwriting Review";
-      verdictBadge.style.color = "var(--accent-amber)";
-      verdictBadge.style.backgroundColor = "rgba(251, 191, 36, 0.15)";
-      verdictBadge.style.borderColor = "rgba(251, 191, 36, 0.3)";
-    } else {
-      riskPctDisplay.style.color = "var(--accent-red)";
-      verdictBadge.textContent = "High Default Probability — Declined";
-      verdictBadge.style.color = "var(--accent-red)";
-      verdictBadge.style.backgroundColor = "rgba(248, 113, 113, 0.15)";
-      verdictBadge.style.borderColor = "rgba(248, 113, 113, 0.3)";
     }
   }
 
-  [cibilInput, incomeInput, dtiInput].forEach((input) => {
-    if (input) {
-      input.addEventListener("input", calculateRiskScore);
-    }
+  requestAnimationFrame(renderMatrix);
+}
+
+window.addEventListener('resize', initCanvas);
+initCanvas();
+renderMatrix();
+
+/* ==========================================================================
+   2. Mobile Navigation Toggle
+   ========================================================================== */
+const mobileToggle = document.getElementById('mobile-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+if (mobileToggle && navMenu) {
+  mobileToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('open');
   });
 
-  // Run calculation once on load
-  calculateRiskScore();
-
-  // 5. One-Click Copy Email to Clipboard
-  const copyBtn = document.getElementById("copyBtn");
-  if (copyBtn) {
-    copyBtn.addEventListener("click", () => {
-      const email = "santhakumar.aids@gmail.com";
-      navigator.clipboard.writeText(email).then(() => {
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = "Copied to Clipboard!";
-        copyBtn.style.color = "var(--accent-cyan)";
-        setTimeout(() => {
-          copyBtn.textContent = originalText;
-          copyBtn.style.color = "";
-        }, 2200);
-      });
+  document.querySelectorAll('#nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('open');
     });
+  });
+}
+
+/* ==========================================================================
+   3. Real-Time Logistic Regression Inference Simulator
+   ========================================================================== */
+const sliderCredit = document.getElementById('slider-credit');
+const sliderIncome = document.getElementById('slider-income');
+const sliderDti = document.getElementById('slider-dti');
+
+const valCredit = document.getElementById('val-credit');
+const valIncome = document.getElementById('val-income');
+const valDti = document.getElementById('val-dti');
+
+const probDisplay = document.getElementById('prob-display');
+const gaugeFill = document.getElementById('gauge-fill');
+const verdictBadge = document.getElementById('verdict-badge');
+
+function computeProbability() {
+  const credit = parseFloat(sliderCredit.value);
+  const income = parseFloat(sliderIncome.value);
+  const dti = parseFloat(sliderDti.value);
+
+  // Update DOM labels
+  valCredit.textContent = credit;
+  valIncome.textContent = income.toFixed(1);
+  valDti.textContent = dti + '%';
+
+  // Feature vector normalized with representative weights
+  // z = w1*(normalized credit) + w2*(normalized income) - w3*(normalized DTI) + bias
+  const z = ((credit - 580) / 100) * 1.35 +
+            ((income - 10) / 10) * 0.90 -
+            ((dti - 25) / 15) * 1.50 + 0.5;
+
+  // Sigmoid transfer function
+  const probability = 1 / (1 + Math.exp(-z));
+  const finalPercentage = Math.min(Math.max(probability * 100, 2), 98.8).toFixed(1);
+
+  // Update UI Elements
+  probDisplay.textContent = finalPercentage + '%';
+  gaugeFill.style.width = finalPercentage + '%';
+
+  if (finalPercentage >= 65) {
+    verdictBadge.textContent = "Eligible / Low Risk";
+    verdictBadge.className = "result-badge badge-approved";
+    gaugeFill.style.background = "var(--accent-green)";
+  } else if (finalPercentage >= 45) {
+    verdictBadge.textContent = "Review / Moderate Risk";
+    verdictBadge.className = "result-badge badge-review";
+    gaugeFill.style.background = "var(--accent-amber)";
+  } else {
+    verdictBadge.textContent = "Ineligible / High Risk";
+    verdictBadge.className = "result-badge badge-denied";
+    gaugeFill.style.background = "var(--accent-red)";
   }
+}
+
+[sliderCredit, sliderIncome, sliderDti].forEach(slider => {
+  if (slider) slider.addEventListener('input', computeProbability);
 });
+
+// Run once on load
+computeProbability();
+  
