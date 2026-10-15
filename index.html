@@ -3,457 +3,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Santha Kumar | AI & Data Science Portfolio</title>
-  <style>
-    :root {
-      --bg: #0b0f19;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --primary: #38bdf8;
-      --primary-hover: #0284c7;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-family);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .navbar {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-      transition: color 0.2s ease;
-    }
-
-    .menu-icon {
-      display: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    /* Containers & Sections */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 4.5rem 1.5rem;
-    }
-
-    .section-tag {
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      min-height: 75vh;
-    }
-
-    .hero-content {
-      flex: 1;
-    }
-
-    .hero-content h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-content h2 {
-      font-size: 1.3rem;
-      color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-content p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      max-width: 540px;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #0b0f19;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-hover);
-      color: #ffffff;
-    }
-
-    .btn-outline {
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.2rem;
-      margin-left: 0.5rem;
-    }
-
-    .social-links a {
-      color: var(--text-muted);
-      font-weight: 500;
-      text-decoration: underline;
-    }
-
-    .social-links a:hover {
-      color: var(--primary);
-    }
-
-    /* Hero Badge / Profile Preview */
-    .hero-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 2.5rem;
-      text-align: center;
-      min-width: 260px;
-    }
-
-    .avatar-circle {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0b0f19;
-      margin: 0 auto 1.2rem auto;
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    .stat-card .val {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .stat-card .desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 0.3rem;
-    }
-
-    /* Skills Grid */
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1rem;
-    }
-
-    .skill-tag {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .skill-tag:hover {
-      border-color: var(--primary);
-      background: rgba(56, 189, 248, 0.1);
-    }
-
-    /* Projects Grid */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .project-tag {
-      font-size: 0.8rem;
-      color: var(--primary);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .project-card h3 {
-      font-size: 1.25rem;
-    }
-
-    .project-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .menu-icon {
-        display: block;
-      }
-
-      .hero {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-      }
-
-      .hero-card {
-        width: 100%;
-      }
-    }
-  </style>
+  <title>Santha Kumar — AI & Data Science Engineer</title>
+  <meta name="description" content="Portfolio of Santha Kumar, AI & Data Science undergraduate specializing in predictive modeling, data pipelines, and applied machine learning." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Ambient Cursor Glow Canvas -->
+  <div class="ambient-glow" id="ambientGlow"></div>
+
+  <!-- Top Banner / Live Status -->
+  <aside class="status-bar">
+    <div class="status-container">
+      <span class="pulse-indicator"></span>
+      <span class="status-text">Seeking Summer/Fall 2026 AI & Data Science Internships</span>
+      <a href="#contact" class="status-cta">Get in touch &rarr;</a>
+    </div>
+  </aside>
+
   <!-- Navigation -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">SK.</div>
-      <div class="menu-icon">&#9776;</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#hero" class="brand">
+        <span class="brand-bracket">[</span>sk<span class="brand-bracket">]</span>
+        <span class="brand-sub">ai.ds</span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#engineering" class="nav-link">Architecture</a>
+        <a href="#projects" class="nav-link">Projects & Live Demo</a>
+        <a href="#stack" class="nav-link">Stack & Capabilities</a>
+        <a href="#timeline" class="nav-link">Track Record</a>
+        <a href="#contact" class="nav-btn">Terminal / Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <div class="section-tag">AI & Data Science</div>
-      <h1>Hi, I'm Santha Kumar</h1>
-      <h2>AI & Data Science Student</h2>
-      <p>I build data-driven solutions using analytics, machine learning, and visualization to solve practical real-world problems.</p>
-      
-      <div class="btn-group">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-outline">Contact Me</a>
-        <div class="social-links">
-          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+  <main>
+    <!-- Hero / Terminal Header -->
+    <section class="hero-section" id="hero">
+      <div class="hero-grid">
+        <div class="hero-statement">
+          <div class="badge-pill">
+            <span class="mono">class Student(Engineer):</span>
+          </div>
+          <h1 class="glitch-title">
+            Engineering robust models, not just running <span class="highlight">.fit()</span>
+          </h1>
+          <p class="hero-subtext">
+            I am <strong>Santha Kumar</strong>, an AI & Data Science undergraduate at PMCE Hosur. I bridge raw, messy data and operational models—focusing on feature pipelines, evaluation metrics, and business viability.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#demo" class="btn btn-primary">Run Live Loan Model</a>
+            <a href="#projects" class="btn btn-secondary">Explore Work</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Terminal Card -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-title">santha_profile.py</span>
+          </div>
+          <div class="terminal-body mono">
+            <p><span class="c-keyword">from</span> candidate <span class="c-keyword">import</span> SanthaKumar</p>
+            <p><span class="c-keyword">import</span> academic_metrics <span class="c-keyword">as</span> am</p>
+            <br>
+            <p>profile = SanthaKumar(</p>
+            <p class="indent"><span class="c-prop">degree</span>="B.Tech AI & Data Science",</p>
+            <p class="indent"><span class="c-prop">institution</span>="PMCE Hosur",</p>
+            <p class="indent"><span class="c-prop">graduation</span>=2027,</p>
+            <p class="indent"><span class="c-prop">cgpa</span>=am.score(<span class="c-num">8.2</span>),</p>
+            <p class="indent"><span class="c-prop">focus</span>=["Supervised ML", "Data Pipelines", "BI Dashboards"]</p>
+            <p>)</p>
+            <br>
+            <p><span class="c-comment"># Status check:</span></p>
+            <p>&gt; profile.is_open_to_work()</p>
+            <p class="c-success">&gt;&gt;&gt; True [Internships / Practical Collaborations]</p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="hero-card">
-      <div class="avatar-circle">SK</div>
-      <h3>B.Tech AI & Data Science</h3>
-      <p style="color: var(--text-muted); margin-top: 0.25rem;">2023 – 2027</p>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <div class="section-tag">About Me</div>
-    <h2 class="section-title">Turning data into useful insights</h2>
-    <p style="color: var(--text-muted); max-width: 800px; font-size: 1.05rem;">
-      I am a B.Tech Artificial Intelligence and Data Science student at Er. Perumal Manimekalai College of Engineering, Hosur. I am interested in Data Analytics, Business Analytics, Data Science, Machine Learning, and AI.
-    </p>
-    <p style="color: var(--text-muted); max-width: 800px; margin-top: 1rem; font-size: 1.05rem;">
-      My focus is on developing practical projects that combine data preparation, analysis, visualization, and machine learning to support better decisions.
-    </p>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="val">8.2</div>
-        <div class="desc">CGPA</div>
+    <!-- Bento Grid / Core Engineering Principles -->
+    <section class="section-container" id="engineering">
+      <div class="section-meta">
+        <span class="mono tag-label">01 // METHODOLOGY</span>
+        <h2>How I Approach Data Science</h2>
       </div>
-      <div class="stat-card">
-        <div class="val">B.Tech</div>
-        <div class="desc">AI & DS Degree</div>
-      </div>
-      <div class="stat-card">
-        <div class="val">2027</div>
-        <div class="desc">Graduation Year</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Skills Section -->
-  <section id="skills">
-    <div class="section-tag">Skills</div>
-    <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-tag">Python</div>
-      <div class="skill-tag">SQL</div>
-      <div class="skill-tag">Excel</div>
-      <div class="skill-tag">Tableau</div>
-      <div class="skill-tag">Power BI</div>
-      <div class="skill-tag">R Programming</div>
-      <div class="skill-tag">Machine Learning</div>
-      <div class="skill-tag">Deep Learning</div>
-      <div class="skill-tag">Data Science</div>
-      <div class="skill-tag">Data Analytics</div>
-      <div class="skill-tag">MATLAB</div>
-    </div>
-  </section>
+      <div class="bento-grid">
+        <div class="bento-card bento-wide">
+          <div class="card-icon">&#9881;</div>
+          <h3>Data Preparation Over Model Complexity</h3>
+          <p>
+            Most real-world models fail because of leakage, collinearity, and unhandled outliers—not because the algorithm wasn't advanced enough. I spend 70% of my cycle analyzing distributions, imputing safely, and building reproducible preprocessing pipelines.
+          </p>
+          <div class="metric-tags">
+            <span>Handling Skewness</span>
+            <span>Feature Scaling</span>
+            <span>Target Encoding</span>
+          </div>
+        </div>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="section-tag">Projects</div>
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <div>
-          <div class="project-tag">Machine Learning</div>
-          <h3 style="margin-top: 0.4rem;">Bank Loan Approval Prediction</h3>
-          <p style="margin-top: 0.8rem;">
-            A predictive classification system built to evaluate applicant eligibility and streamline loan approval decisions using statistical modeling and supervised machine learning algorithms.
+        <div class="bento-card">
+          <div class="card-icon">&#128200;</div>
+          <h3>Metrics That Match Business Cost</h3>
+          <p>
+            Accuracy is misleading on skewed data. I evaluate with <strong>Precision-Recall curves</strong>, <strong>Cost-Matrix thresholds</strong>, and <strong>Confusion Matrices</strong>.
           </p>
         </div>
-        <div>
-          <a href="#" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">View Details &rarr;</a>
+
+        <div class="bento-card">
+          <div class="card-icon">&#128392;</div>
+          <h3>Actionable Reporting</h3>
+          <p>
+            Insights that stay in a Jupyter Notebook don't deliver value. I build self-serve <strong>Power BI</strong> and <strong>Tableau</strong> interfaces for stakeholders to interrogate the data directly.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Anchor -->
-  <section id="contact" style="text-align: center; padding-bottom: 5rem;">
-    <div class="section-tag">Get in Touch</div>
-    <h2 class="section-title">Let's Connect</h2>
-    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem auto;">
-      I'm always open to discussing new opportunities, analytics projects, and machine learning research.
-    </p>
-    <a href="mailto:example@domain.com" class="btn btn-primary">Send an Email</a>
-  </section>
+    <!-- Featured Projects & Live Interactive Widget -->
+    <section class="section-container" id="projects">
+      <div class="section-meta">
+        <span class="mono tag-label">02 // PRODUCTION & MODELS</span>
+        <h2>Featured Systems</h2>
+      </div>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 Santha Kumar. All rights reserved.
-  </footer>
+      <!-- Project 1 with Interactive Model Simulation -->
+      <article class="project-showcase" id="demo">
+        <div class="project-info">
+          <div class="project-tag-row">
+            <span class="tech-badge">Supervised ML</span>
+            <span class="tech-badge">Classification</span>
+            <span class="tech-badge">Risk Analytics</span>
+          </div>
+          <h3>Bank Loan Default & Approval Scoring System</h3>
+          <p>
+            An end-to-end classification system engineered to identify high-risk loan applications while maintaining balanced false-positive ratios. Employs cross-validated scaling and feature importance analysis.
+          </p>
+          
+          <ul class="spec-list">
+            <li><strong>Target Problem:</strong> Unbalanced approval classifications causing credit default.</li>
+            <li><strong>Core Pipeline:</strong> Quantile outlier treatment, one-hot categorical encoding, threshold tuning.</li>
+            <li><strong>Outcome:</strong> 87% ROC-AUC score on test distributions with tuned recall on high-risk applicants.</li>
+          </ul>
 
-</body>
-  </html>
+          <div class="code-links">
+            <a href="#" class="btn btn-secondary btn-sm">Read Case Study &rarr;</a>
+            <a href="#" class="btn btn-ghost btn-sm">GitHub Repository</a>
+          </div>
+        </div>
+
+        <!-- Live Model Sandbox -->
+        <div class="interactive-sandbox">
+          <div class="sandbox-header">
+            <span class="sandbox-dot"></span>
+            <strong>Live Prototype Simulator: Credit Scoring Engine</strong>
+          </div>
+          <p class="sandbox-instruction">
+            Adjust the applicant variables below to simulate real-time scoring logic.
+          </p>
+
+          <form id="loanSimForm" class="sim-form" onsubmit="return false;">
+            <div class="form-row">
+              <label for="cibil">Applicant Credit Score (300 - 900)
+                <span id="cibilVal" class="slider-val">720</span>
+              </label>
+              <input type="range" id="cibil" min="300" max="900" value="720" class="slider">
+            </div>
+
+            <div class="form-row">
+              <label for="income">Annual Household Income (₹ Lakhs)
+                <span id="incomeVal" class="slider-val">12</span>
+              </label>
+              <input type="range" id="income" min="2" max="50" value="12" class="slider">
+            </div>
+
+            <div class="form-row">
+              <label for="dti">Debt-to-Income Ratio (%)
+                <span id="dtiVal" class="slider-val">28%</span>
+              </label>
+              <input type="range" id="dti" min="5" max="80" value="28" class="slider">
+            </div>
+
+            <!-- Output Metric Box -->
+            <div class="sim-result-box" id="resultBox">
+              <div class="sim-metric">
+                <span class="sim-label">Calculated Risk Probability</span>
+                <span class="sim-number" id="riskPct">18%</span>
+              </div>
+              <div class="sim-verdict" id="verdictBadge">Eligible for Automated Approval</div>
+            </div>
+          </form>
+        </div>
+      </article>
+
+      <!-- Additional Planned & Research Work -->
+      <div class="sub-projects-grid">
+        <div class="sub-project-card">
+          <span class="mono card-idx">PRJ // 02</span>
+          <h4>Customer Churn Diagnostics & Lifetime Value</h4>
+          <p>Multi-feature survival and churn prediction combining XGBoost with automated Tableau monitoring for customer retention teams.</p>
+          <div class="mini-tags">
+            <span>Python</span><span>Scikit-Learn</span><span>Tableau</span>
+          </div>
+        </div>
+
+        <div class="sub-project-card">
+          <span class="mono card-idx">PRJ // 03</span>
+          <h4>Multi-Source SQL Analytics Warehouse</h4>
+          <p>Schema design, star-schema modeling, and complex analytical CTEs built to surface KPI metrics across relational transaction tables.</p>
+          <div class="mini-tags">
+            <span>PostgreSQL</span><span>Window Functions</span><span>Data Modeling</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Matrix -->
+    <section class="section-container" id="stack">
+      <div class="section-meta">
+        <span class="mono tag-label">03 // TOOLKIT</span>
+        <h2>Technical Competencies</h2>
+      </div>
+
+      <div class="matrix-grid">
+        <div class="matrix-col">
+          <div class="matrix-heading">
+            <span class="mono">01.</span> Core Programming & Querying
+          </div>
+          <ul class="matrix-items">
+            <li><strong>Python:</strong> Pandas, NumPy, Scikit-Learn, SciPy</li>
+            <li><strong>SQL:</strong> Joins, Subqueries, CTEs, Windowing, Aggregations</li>
+            <li><strong>R:</strong> Exploratory Statistics, Hypothesis Testing</li>
+            <li><strong>MATLAB:</strong> Matrix Operations, Signal Basics</li>
+          </ul>
+        </div>
+
+        <div class="matrix-col">
+          <div class="matrix-heading">
+            <span class="mono">02.</span> Machine Learning & Analytics
+          </div>
+          <ul class="matrix-items">
+            <li><strong>Supervised:</strong> Linear/Logistic, Trees, Random Forests, XGBoost</li>
+            <li><strong>Unsupervised:</strong> K-Means, PCA, Dimensionality Reduction</li>
+            <li><strong>Validation:</strong> Stratified K-Fold, ROC-AUC, Log-Loss</li>
+            <li><strong>Data Prep:</strong> Outlier Bounds, Missing Imputations, Normalization</li>
+          </ul>
+        </div>
+
+        <div class="matrix-col">
+          <div class="matrix-heading">
+            <span class="mono">03.</span> Business Intelligence & Presentation
+          </div>
+          <ul class="matrix-items">
+            <li><strong>Power BI:</strong> DAX Measures, Dashboard Architecture</li>
+            <li><strong>Tableau:</strong> Calculated Fields, Interactive Storyboards</li>
+            <li><strong>Excel:</strong> Power Query, Pivot Modeling, Analytical Lookups</li>
+            <li><strong>Storytelling:</strong> Executive Summaries, Metric Framing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic & Timeline Track Record -->
+    <section class="section-container" id="timeline">
+      <div class="section-meta">
+        <span class="mono tag-label">04 // EDUCATION & PROGRESSION</span>
+        <h2>Milestones & Grounding</h2>
+      </div>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-row">
+          <div class="timeline-date mono">2023 &mdash; 2027</div>
+          <div class="timeline-content">
+            <div class="timeline-title-row">
+              <h3>B.Tech — Artificial Intelligence & Data Science</h3>
+              <span class="timeline-badge">8.2 CGPA</span>
+            </div>
+            <p class="institution">Er. Perumal Manimekalai College of Engineering, Hosur</p>
+            <p class="description">
+              Rigorous coursework in probability theory, linear algebra, relational database architecture, discrete mathematics, and neural network foundations.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-date mono">2024 &mdash; Present</div>
+          <div class="timeline-content">
+            <div class="timeline-title-row">
+              <h3>Applied Systems & Self-Directed Engineering</h3>
+              <span class="timeline-badge">Active</span>
+            </div>
+            <p class="institution">Independent Lab & Kaggle Problem Sets</p>
+            <p class="description">
+              Implementing end-to-end models on tabular credit, housing, and operational datasets. Emphasizing clean modular script design over monolithic scratchpads.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terminal Contact Area -->
+    <section class="section-container" id="contact">
+      <div class="contact-terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="terminal-title">contact_dispatch.sh</span>
+        </div>
+        <div class="contact-body">
+          <h2>Ready to talk data, models, or opportunities?</h2>
+          <p>
+            I am actively looking for internship roles and data science project collaborations. My inbox is monitored daily.
+          </p>
+
+          <div class="action-bar">
+            <a href="mailto:santhakumar.aids@gmail.com" class="btn btn-primary" id="emailBtn">
+              santhakumar.aids@gmail.com
+            </a>
+            <button class="btn btn-secondary" id="copyBtn">
+              Copy Email
+            </button>
+          </div>
+
+          <div class="social-row mono">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn &nearr;</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub &nearr;</a>
+            <a href="#hero">Back to top &uarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; <span id="currentYear"></span> Santha Kumar. Designed with semantic HTML, modular CSS, and zero external JS frameworks.</p>
+      <div class="footer-meta mono">Status: Available for 2026/2027 Internships
   
